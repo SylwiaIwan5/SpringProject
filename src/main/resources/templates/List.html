@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+    <title>List</title>
+</head>
+<body>
+    <div class="container-fluid tl-3">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/form">Add new employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list">List of employees</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/adminH2">Database (administrator panel)</a>
+            </li>
+        </ul>
+
+        <p align="right"><a href="/logout"><button class="btn btn-secondary">Logout!</button></a></p>
+
+        <h1 class="display-4 text-dark">Employees list.</h1>
+
+        <table class="table table-striped">
+            <tr><th>Name</th><th>Surname</th><th>Telephone number</th><th>Business name</th><th>Actions</th></tr>
+
+            <tr>
+                <td>
+                    <form action="/searchByName">
+                        Filters: <input name="name" style="width: 50%;">
+                        <button type="submit" class="btn btn-dark" value="searchByName">Search</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/searchBySurname">
+                        <input name="surname" style="width: 70%;">
+                        <button type="submit" class="btn btn-dark" value="searchBySurname">Search</button>
+                    </form>
+                </td>
+                <td>
+<!--                    <form action="/searchByTelephoneNumber">-->
+<!--                        <input name="telephoneNumber" style="width: 60%;">-->
+<!--                        <button type="submit" class="btn btn-dark" value="searchByTelephoneNumber">Search</button>-->
+<!--                    </form>-->
+                </td>
+                <td>
+<!--                    <form action="/searchByBusinessName">-->
+<!--                        <input name="businessName" style="width: 70%;">-->
+<!--                        <button type="submit" class="btn btn-dark" value="searchByBusinessName">Search</button>-->
+<!--                    </form>-->
+                </td>
+                <td>
+                    <a href="#" th:href="@{/list}" class="btn btn-dark">List all</a>
+                </td>
+            </tr>
+
+            <tr th:each="employee: ${employees}">
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.surname}"></td>
+                <td th:text="${employee.telephone.telephoneNumber}"></td>
+                <td th:text="${employee.company.businessName}"></td>
+                <td>
+                    <a href="#" th:href="@{/update(id=${employee.id})}" class="btn btn-primary">Update</a>
+                    <a href="#" th:href="@{/delete(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

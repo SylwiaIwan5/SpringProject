@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+    <title>Update</title>
+</head>
+<body>
+    <div class="container-fluid tl-3">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/form">Add new employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list">List of employees</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/adminH2">Database (administrator panel)</a>
+            </li>
+        </ul>
+
+        <p align="right"><a href="/logout"><button class="btn btn-secondary">Logout!</button></a></p>
+        <h1 class="display-4 text-dark">Update the details of the employee.</h1>
+        <form th:action="@{/update}" th:object="${employees}" method="post">
+            <input type="hidden" th:field="*{id}" name="id" required>
+            <div class="form-group">
+                <label class="lead" for="nameInput">Name:</label>
+                <input type="text" class="form-control" id="nameInput" th:field="*{name}" style="width: 200px;" name = "name" required>
+            </div>
+            <div class="form-group">
+                <label class="lead" for="surnameInput">Surname:</label>
+                <input type="text" class="form-control" id="surnameInput" th:field="*{surname}" style="width: 300px;" name = "surname" required>
+            </div>
+            <input type="hidden" th:field="*{telephone.id}" name="telephoneId" required>
+            <div class="form-group">
+                <label class="lead" for="telephoneNumberInput">Telephone number:</label>
+                <input type="number" class="form-control" id="telephoneNumberInput" th:field="*{telephone.telephoneNumber}" style="width: 200px;" name = "telephoneNumber" required>
+            </div>
+            <input type="hidden" th:field="*{company.id}" name="companyId" required>
+            <div class="form-group">
+                <label class="lead" for="businessNameInput">Business name:</label>
+                <input type="text" class="form-control" id="businessNameInput" th:field="*{company.businessName}" style="width: 500px;" name = "businessName" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark" value="update">Update</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
